@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">NUMADSU22_A8</string>
+    <string name="app_name">Stick It To Em</string>
+    <string name="user_prompt">Enter Username</string>
+    <string name="pass_prompt">Enter Password</string>
+    <string name="log_btn">Login</string>
+    <string name="send">Send Stickers</string>
+    <string name="hist_chat">Chat history or send more stickers</string>
+    <string name="user">Username</string>
 </resources>
