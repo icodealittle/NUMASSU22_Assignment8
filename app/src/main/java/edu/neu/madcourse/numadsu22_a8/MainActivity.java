@@ -25,6 +25,10 @@ Color Pallet 2:
 
     Link: https://coolors.co/26547c-ef476f-ffd166-06d6a0-fffcf9
  */
+
+/*
+server key: AAAAs051oc4:APA91bFBCPgpIOgzWA3CgH4wC9tf1kFhLOmXIWTi8abyUtz_US17u7mFBgeiQyNjPIR2RGzqDpan14aOSI0zeGlLTmEIcDFLk7NdzTkf4INDisYelsEaicNNYdnYclLX9WWNvuoI687E
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
