@@ -6,4 +6,5 @@
     <string name="send">Send Stickers</string>
     <string name="hist_chat">Chat history or send more stickers</string>
     <string name="user">Username</string>
+    <string name="welcome_user">Welcome!</string>
 </resources>
