@@ -7,4 +7,11 @@
     <string name="hist_chat">Chat history or send more stickers</string>
     <string name="user">Username</string>
     <string name="welcome_user">Welcome!</string>
+    <string name="notify">Message from:</string>
+    <string name="sticker_name">Sticker name:</string>
+    <string name="sticker_image">Sticker image:</string>
+    <string name="back_btn">Back</string>
+    <string name="num_sent">Num stickers sent</string>
+    <string name="token">Token</string>
+    <string name="stat">User Usage Stats</string>
 </resources>
