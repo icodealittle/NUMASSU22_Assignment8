@@ -24,7 +24,7 @@ Color Pallet 2:
     - #FFFCF9
 
     Link: https://coolors.co/26547c-ef476f-ffd166-06d6a0-fffcf9
- */
+ **/
 public class MainActivity extends AppCompatActivity {
 
     @Override
