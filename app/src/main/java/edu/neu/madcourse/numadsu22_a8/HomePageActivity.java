@@ -1,6 +1,8 @@
 package edu.neu.madcourse.numadsu22_a8;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ public class HomePageActivity extends AppCompatActivity {
     List<User> friendList;
     List<String> stickerList;
     public StickerAdaptor stickerAdaptor;
+    Button sendBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,14 @@ public class HomePageActivity extends AppCompatActivity {
         friendListRecyclerView.setHasFixedSize(true);
         friendListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         friendListRecyclerView.setAdapter(new FriendAdaptor(friendList, this));
+
+        sendBtn = findViewById(R.id.sendSticker);
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public List<User> getFriendList() {

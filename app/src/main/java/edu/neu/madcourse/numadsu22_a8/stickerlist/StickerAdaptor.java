@@ -37,12 +37,7 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bindThisData(stickerList.get(position));
-//        holder.username.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Open a new rv
-//            }
-//        });
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

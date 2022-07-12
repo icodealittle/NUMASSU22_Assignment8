@@ -54,6 +54,8 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
             public void onClick(View view) {
                 row_index=position;
                 notifyDataSetChanged();
+                controller.stickerAdaptor.row_index = -1;
+                controller.stickerAdaptor.notifyDataSetChanged();
             }
         });
         if(row_index==position){
