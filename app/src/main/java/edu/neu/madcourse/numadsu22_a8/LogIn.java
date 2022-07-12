@@ -58,8 +58,6 @@ public class LogIn extends AppCompatActivity {
 
         fireBase = FirebaseDatabase.getInstance().getReference();
 
-        fireBase.child("message").setValue("TEST");
-
         fireBase.child("users").addChildEventListener(
                 new ChildEventListener() {
 
