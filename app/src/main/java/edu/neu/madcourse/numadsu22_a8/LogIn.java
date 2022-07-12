@@ -1,6 +1,7 @@
 package edu.neu.madcourse.numadsu22_a8;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,8 @@ public class LogIn extends AppCompatActivity {
 
         fireBase = FirebaseDatabase.getInstance().getReference();
 
+        fireBase.child("message").setValue("TEST");
+
         fireBase.child("users").addChildEventListener(
                 new ChildEventListener() {
 
@@ -89,20 +92,26 @@ public class LogIn extends AppCompatActivity {
 
         login = findViewById(R.id.login_btn);
         userNameInput = findViewById(R.id.username);
-        fireBase.child("users");
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("test", "onclick");
                 userName = userNameInput.getText().toString();
                 User user = new User(userName, CLIENT_REGISTRATION_TOKEN);
                 Task t1 = fireBase.child("users").child(user.username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        Log.e("test", "finish");
                         if (!task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), ("Unable to reset " + userName + " !"), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("adduser", "succeed");
+                            Intent i = new Intent(LogIn.this, HomePageActivity.class);
+                            startActivity(i);
                         }
                     }
                 });
+
             }
 
         });
