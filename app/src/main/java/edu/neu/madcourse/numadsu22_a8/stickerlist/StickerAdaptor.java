@@ -1,48 +1,42 @@
-package edu.neu.madcourse.numadsu22_a8.friendlist;
+package edu.neu.madcourse.numadsu22_a8.stickerlist;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.neu.madcourse.numadsu22_a8.HomePageActivity;
 import edu.neu.madcourse.numadsu22_a8.R;
 import edu.neu.madcourse.numadsu22_a8.User;
-import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
+import edu.neu.madcourse.numadsu22_a8.friendlist.FriendViewHolder;
 
-public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
-    private final List<User> friendList;
+public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
+    private final List<String> stickerList;
     private final Context context;
-    private int row_index = -1;
-    private HomePageActivity controller;
+    public int row_index = -1;
 
 
-    public FriendAdaptor(List<User> friendList, Context context) {
-        this.friendList = friendList;
+    public StickerAdaptor(List<String> stickerList, Context context) {
+        this.stickerList = stickerList;
         this.context = context;
-        this.controller = (HomePageActivity) context;
     }
 
     @NonNull
     @Override
-    public FriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new FriendViewHolder(LayoutInflater.from(context).inflate(R.layout.friend_item, null));
+    public StickerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new StickerViewHolder(LayoutInflater.from(context).inflate(R.layout.sticker_item, null));
         // item_link layout!
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.bindThisData(friendList.get(position));
+    public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.bindThisData(stickerList.get(position));
 //        holder.username.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -56,6 +50,7 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
                 notifyDataSetChanged();
             }
         });
+
         if(row_index==position){
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
             holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
@@ -70,6 +65,6 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
 
     @Override
     public int getItemCount() {
-        return friendList.size();
+        return stickerList.size();
     }
 }
