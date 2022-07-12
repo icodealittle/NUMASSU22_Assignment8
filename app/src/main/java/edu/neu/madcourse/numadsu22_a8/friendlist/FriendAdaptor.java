@@ -25,6 +25,7 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
     private final Context context;
     private int row_index = -1;
     private HomePageActivity controller;
+    public String senderName;
 
 
     public FriendAdaptor(List<User> friendList, Context context) {
@@ -61,6 +62,7 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
         if(row_index==position){
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
             holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
+            senderName = friendList.get(row_index).username;
         }
         else
         {

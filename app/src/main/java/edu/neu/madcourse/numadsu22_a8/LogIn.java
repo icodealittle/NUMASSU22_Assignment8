@@ -105,6 +105,7 @@ public class LogIn extends AppCompatActivity {
                         } else {
                             Log.e("adduser", "succeed");
                             Intent i = new Intent(LogIn.this, HomePageActivity.class);
+                            i.putExtra("user", user);
                             startActivity(i);
                         }
                     }
