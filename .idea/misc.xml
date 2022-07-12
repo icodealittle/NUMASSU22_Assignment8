@@ -7,11 +7,12 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.168" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/friend_item.xml" value="0.19015045166015626" />
-        <entry key="app/src/main/res/layout/home_page_activity.xml" value="0.37050170898437496" />
+        <entry key="app/src/main/res/layout/home_page_activity.xml" value="0.10224914550781247" />
         <entry key="app/src/main/res/layout/login.xml" value="0.11320953369140624" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/spinner_items.xml" value="0.1" />
         <entry key="app/src/main/res/layout/spinner_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/user_stats.xml" value="0.1" />
         <entry key="app/src/main/res/layout/user_summary.xml" value="0.2833333333333333" />
       </map>
     </option>

@@ -1,11 +1,14 @@
 package edu.neu.madcourse.numadsu22_a8.friendlist;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +21,7 @@ import edu.neu.madcourse.numadsu22_a8.User;
 public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
     private final List<User> friendList;
     private final Context context;
+    private int row_index;
 
 
     public FriendAdaptor(List<User> friendList, Context context) {
@@ -33,7 +37,7 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FriendViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bindThisData(friendList.get(position));
 //        holder.username.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -41,6 +45,23 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
 //                // Open a new rv
 //            }
 //        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                row_index=position;
+                notifyDataSetChanged();
+            }
+        });
+        if(row_index==position){
+            holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
+            holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else
+        {
+            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.nameTV.setTextColor(Color.parseColor("#000000"));
+        }
+
     }
 
     @Override
