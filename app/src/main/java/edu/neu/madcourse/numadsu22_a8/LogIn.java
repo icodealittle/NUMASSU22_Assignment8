@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LogIn extends AppCompatActivity {
@@ -95,19 +96,46 @@ public class LogIn extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("test", "onclick");
                 userName = userNameInput.getText().toString();
-                User user = new User(userName, CLIENT_REGISTRATION_TOKEN);
-                Task t1 = fireBase.child("users").child(user.username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                fireBase.child("users").child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.e("test", "finish");
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), ("Unable to reset " + userName + " !"), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e("adduser", "succeed");
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+                            User user = snapshot.getValue(User.class);
+                            if(user.token != CLIENT_REGISTRATION_TOKEN)
+                            {
+                                snapshot.child("token").getRef().setValue(CLIENT_REGISTRATION_TOKEN);
+                                user.token = CLIENT_REGISTRATION_TOKEN;
+                            }
+
                             Intent i = new Intent(LogIn.this, HomePageActivity.class);
                             i.putExtra("user", user);
                             startActivity(i);
                         }
+                        else
+                        {
+                            User user = new User(userName, CLIENT_REGISTRATION_TOKEN);
+                            Task t1 = fireBase.child("users").child(user.username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Log.e("test", "finish");
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), ("Unable to reset " + userName + " !"), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Log.e("adduser", "succeed");
+                                        Intent i = new Intent(LogIn.this, HomePageActivity.class);
+                                        i.putExtra("user", user);
+                                        startActivity(i);
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 

@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
 public class HomePageActivity extends AppCompatActivity {
     RecyclerView friendListRecyclerView;
     RecyclerView stickerListRecyclerView;
-    List<User> friendList;
+    List<User> friendList = new ArrayList<>();
     List<String> stickerList;
     public StickerAdaptor stickerAdaptor;
     public FriendAdaptor friendAdaptor;
@@ -51,6 +52,8 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fireBase = FirebaseDatabase.getInstance().getReference().child("users");
+
         setContentView(R.layout.home_page_activity);
 
         stickerList = getStickerList();
@@ -61,20 +64,17 @@ public class HomePageActivity extends AppCompatActivity {
         stickerAdaptor = new StickerAdaptor(stickerList, this);
         stickerListRecyclerView.setAdapter(stickerAdaptor);
 
-        message = stickerAdaptor.message;
-
-        friendList = getFriendList();
-
         friendListRecyclerView = findViewById(R.id.recyclerView);
         friendListRecyclerView.setHasFixedSize(true);
         friendListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         friendAdaptor = new FriendAdaptor(friendList, this);
-        friendListRecyclerView.setAdapter(new FriendAdaptor(friendList, this));
-
-        receiver = friendAdaptor.senderName;
-        SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-"; //Add key
+        friendListRecyclerView.setAdapter(friendAdaptor);
 
         currentUser = (User)getIntent().getSerializableExtra("user");
+        initFriendList();
+
+        SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-"; //Add key
+
         sender = currentUser.username;
         // Save token
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
@@ -92,9 +92,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        fireBase = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.username);
-
-        fireBase.child("history").addChildEventListener(
+        fireBase.child(sender).child("history").addChildEventListener(
                 new ChildEventListener() {
 
                     @Override
@@ -129,11 +127,16 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("test", "onclick");
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 date = dtf.format(now);
-                ChatHistory record = new ChatHistory(sender, receiver, date, message);
-                Task t1 = fireBase.child("history").child("chat "+date).setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                message = stickerAdaptor.message;
+                receiver = friendAdaptor.senderName;
+
+
+                ChatHistory record = new ChatHistory(sender, date, message);
+                Task t1 = fireBase.child(receiver).child("history").child("chat "+date).setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Log.e("test", "finish");
@@ -150,15 +153,25 @@ public class HomePageActivity extends AppCompatActivity {
         });
     }
 
-    public List<User> getFriendList() {
-        User user1 = new User("test1", "token1");
-        User user2 = new User("test2", "token2");
-        User user3 = new User("test3", "token3");
-        List<User> testList = new ArrayList<>();
-        testList.add(user1);
-        testList.add(user2);
-        testList.add(user3);
-        return testList;
+    public void initFriendList() {
+        fireBase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getChildren().forEach(child->{
+                    if(!child.getValue(User.class).username.equals(currentUser.username)){
+                        friendList.add(child.getValue(User.class));
+                    }
+                });
+
+                friendAdaptor = new FriendAdaptor(friendList, friendListRecyclerView.getContext());
+                friendListRecyclerView.setAdapter(friendAdaptor);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public List<String> getStickerList() {
