@@ -1,47 +1,61 @@
+
 package edu.neu.madcourse.numadsu22_a8;
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
+
+
+//source: https://firebase.google.com/docs/cloud-messaging/android/topic-messaging#java_1
 public class NotificationActivity extends AppCompatActivity {
+    private User currentUser;
     private String username;
     private String token;
+    private static final String TAG = "NotificationActivity";
 
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference userReference;
-    private DatabaseReference userHistoryReference;
-    private DatabaseReference allUsersReference;
-
-    //private static final String SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.notification);
+        currentUser = (User)getIntent().getSerializableExtra("user");
+        username = currentUser.username;
 
-        //get current username and token TODO
-
-        createDatabaseResources();
         createNotificationChannel();
     }
 
-    private void createDatabaseResources() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        userReference = firebaseDatabase.getReference("Users/"+username);
-        userHistoryReference= firebaseDatabase.getReference("Users/"+username+"/received_history");
-        allUsersReference = firebaseDatabase.getReference("Users");
-    }
-
-    private void createNotificationChannel() {
+    public void createNotificationChannel() {
         NotificationChannel channel = new NotificationChannel
-                ("A8_Channel", username, NotificationManager.IMPORTANCE_DEFAULT);
+                ("Notification_Channel", username, NotificationManager.IMPORTANCE_DEFAULT);
         channel.setDescription("Notifications for "+ username);
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
+        subscribeToTopic();
     }
+
+    private void subscribeToTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(username).addOnCompleteListener((task -> {
+            String subscribeMsg = "Subscribed";
+            if(!task.isSuccessful()) {
+                Log.d(TAG, "Subscription Failed");
+            } else {
+                Log.d(TAG, subscribeMsg);
+                Toast.makeText(NotificationActivity.this, subscribeMsg, Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+    }
+
 
 }

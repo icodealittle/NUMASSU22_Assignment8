@@ -37,6 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
     List<String> stickerList;
     public StickerAdaptor stickerAdaptor;
     public FriendAdaptor friendAdaptor;
+    public NotificationActivity notificationActivity;
     Button sendBtn;
     private static String CLIENT_REGISTRATION_TOKEN;
     private static String SERVER_KEY;
@@ -69,6 +70,8 @@ public class HomePageActivity extends AppCompatActivity {
         friendListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         friendAdaptor = new FriendAdaptor(friendList, this);
         friendListRecyclerView.setAdapter(friendAdaptor);
+
+        notificationActivity = new NotificationActivity();
 
         currentUser = (User)getIntent().getSerializableExtra("user");
         initFriendList();
