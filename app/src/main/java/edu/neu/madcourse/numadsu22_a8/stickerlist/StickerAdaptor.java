@@ -10,22 +10,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.numadsu22_a8.R;
-import edu.neu.madcourse.numadsu22_a8.User;
-import edu.neu.madcourse.numadsu22_a8.friendlist.FriendViewHolder;
 
 public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
-    private final List<String> stickerList;
     private final Context context;
     public int row_index = -1;
-    public String message;
+    public int message = -1;
+    public List<Integer> stickerList = new ArrayList<>();
 
 
-    public StickerAdaptor(List<String> stickerList, Context context) {
+    public StickerAdaptor(List<Integer> stickerList, Context context) {
         this.stickerList = stickerList;
         this.context = context;
+//        images = new int[]{R.drawable.pokemon, R.drawable.drink1, R.drawable.drink2,
+//                R.drawable.drink3, R.drawable.drink4, R.drawable.drink5, R.drawable.drink6};
     }
 
     @NonNull
@@ -49,13 +50,11 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
 
         if(row_index==position){
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
-            holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
             message = stickerList.get(row_index);
         }
         else
         {
             holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
-            holder.nameTV.setTextColor(Color.parseColor("#000000"));
         }
 
     }
