@@ -1,6 +1,8 @@
 package edu.neu.madcourse.numadsu22_a8.stickerlist;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,17 +14,14 @@ import edu.neu.madcourse.numadsu22_a8.User;
 
 public class StickerViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView nameTV;
+    public ImageView stickerIV;
 
     public StickerViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.nameTV = itemView.findViewById(R.id.stickerNameTV);
+        this.stickerIV = itemView.findViewById(R.id.stickerIV);
     }
 
-    public void bindThisData(String name) {
-        // sets the name of the person to the name textview of the viewholder.
-        nameTV.setText(name);
+    public void bindThisData(int imagePath) {
+        stickerIV.setImageResource(imagePath);
     }
-
-
 }

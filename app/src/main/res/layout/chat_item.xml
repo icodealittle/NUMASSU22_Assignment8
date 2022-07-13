@@ -21,11 +21,11 @@
         android:layout_height="20dp" />
 
     <TextView
-        android:id="@+id/by_user"
+        android:id="@+id/dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/user"
+        android:text="time"
         android:textSize="18sp" />
 
     <Space
@@ -33,11 +33,11 @@
         android:layout_height="20dp" />
 
     <TextView
-        android:id="@+id/received_sticker_textview"
+        android:id="@+id/senderNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/notif"
+        android:text="User1"
         android:textSize="24sp" />
 
 </LinearLayout>

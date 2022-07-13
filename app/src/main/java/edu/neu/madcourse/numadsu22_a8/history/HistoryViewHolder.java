@@ -1,32 +1,32 @@
 package edu.neu.madcourse.numadsu22_a8.history;
 
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.neu.madcourse.numadsu22_a8.R;
-import edu.neu.madcourse.numadsu22_a8.User;
 
 public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
     public TextView nameTV;
     public TextView dateTV;
-    public TextView message;
+    public ImageView stickerTV;
 
     public HistoryViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.nameTV = itemView.findViewById(R.id.usernameTV);
+        this.nameTV = itemView.findViewById(R.id.senderNameTV);
+        this.dateTV = itemView.findViewById(R.id.dateTV);
+        this.stickerTV = itemView.findViewById(R.id.received);
 
     }
 
-    public void bindThisData(User user) {
+    public void bindThisData(ChatHistory record) {
         // sets the name of the person to the name textview of the viewholder.
-        nameTV.setText(user.username);
+        nameTV.setText(record.sender);
+        dateTV.setText(record.date);
+        stickerTV.setImageResource(record.message);
     }
-
-
-}
 }

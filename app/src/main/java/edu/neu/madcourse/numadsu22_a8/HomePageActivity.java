@@ -25,19 +25,24 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.neu.madcourse.numadsu22_a8.friendlist.FriendAdaptor;
+import edu.neu.madcourse.numadsu22_a8.history.ChatHistory;
+import edu.neu.madcourse.numadsu22_a8.history.HistoryCollector;
 import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
 
 public class HomePageActivity extends AppCompatActivity {
     RecyclerView friendListRecyclerView;
     RecyclerView stickerListRecyclerView;
     List<User> friendList = new ArrayList<>();
-    List<String> stickerList;
+    List<Integer> stickerList = new ArrayList<>(Arrays.asList(R.drawable.drink1, R.drawable.drink2, R.drawable.drink3, R.drawable.drink4,
+            R.drawable.drink5));
     public StickerAdaptor stickerAdaptor;
     public FriendAdaptor friendAdaptor;
     Button sendBtn;
+    Button checkHistoryBtn;
     private static String CLIENT_REGISTRATION_TOKEN;
     private static String SERVER_KEY;
     private DatabaseReference fireBase;
@@ -46,8 +51,7 @@ public class HomePageActivity extends AppCompatActivity {
     private String sender;
     private String receiver;
     private String date;
-    private String message;
-
+    private int message = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +60,19 @@ public class HomePageActivity extends AppCompatActivity {
 
         setContentView(R.layout.home_page_activity);
 
-        stickerList = getStickerList();
-
+        Log.e("Error", "set view");
         stickerListRecyclerView = findViewById(R.id.recyclerViewSticker);
         stickerListRecyclerView.setHasFixedSize(true);
         stickerListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         stickerAdaptor = new StickerAdaptor(stickerList, this);
         stickerListRecyclerView.setAdapter(stickerAdaptor);
-
+        Log.e("Error", "set sticker");
         friendListRecyclerView = findViewById(R.id.recyclerView);
         friendListRecyclerView.setHasFixedSize(true);
         friendListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         friendAdaptor = new FriendAdaptor(friendList, this);
         friendListRecyclerView.setAdapter(friendAdaptor);
-
+        Log.e("Error", "set friends");
         currentUser = (User)getIntent().getSerializableExtra("user");
         initFriendList();
 
@@ -93,33 +96,33 @@ public class HomePageActivity extends AppCompatActivity {
         });
 
         fireBase.child(sender).child("history").addChildEventListener(
-                new ChildEventListener() {
+            new ChildEventListener() {
 
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
                 }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            }
         );
 
         sendBtn = findViewById(R.id.sendSticker);
@@ -133,23 +136,36 @@ public class HomePageActivity extends AppCompatActivity {
 
                 message = stickerAdaptor.message;
                 receiver = friendAdaptor.senderName;
-
-
-                ChatHistory record = new ChatHistory(sender, date, message);
-                Task t1 = fireBase.child(receiver).child("history").child("chat "+date).setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.e("test", "finish");
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), ("Unable to send!"), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), ("Send your sticker to "+receiver+" !"), Toast.LENGTH_SHORT).show();
+                if (receiver == null) {
+                    Toast.makeText(getApplicationContext(), ("Please select a receiver!"), Toast.LENGTH_SHORT).show();
+                } else if (message == -1) {
+                    Toast.makeText(getApplicationContext(), ("Please select a sticker!"), Toast.LENGTH_SHORT).show();
+                } else {
+                    ChatHistory record = new ChatHistory(sender, date, message);
+                    Task t1 = fireBase.child(receiver).child("history").child("chat " + date).setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.e("test", "finish");
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), ("Unable to send!"), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), ("Send your sticker to " + receiver + " !"), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
             }
+        });
 
+        checkHistoryBtn = findViewById(R.id.history);
+        checkHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("test", "onclick usage");
+                Intent i = new Intent(HomePageActivity.this, HistoryCollector.class);
+                i.putExtra("user", currentUser);
+                startActivity(i);
+            }
         });
     }
 
@@ -172,14 +188,6 @@ public class HomePageActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public List<String> getStickerList() {
-        List<String> testList = new ArrayList<>();
-        testList.add("Test1");
-        testList.add("TEst2");
-        testList.add("Test3");
-        return testList;
     }
 
 }
