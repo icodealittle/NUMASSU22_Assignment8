@@ -16,4 +16,5 @@
     <string name="stat">User Usage Stats</string>
     <string name="notif">New sticker!</string>
     <string name="sticker">Sticker</string>
+    <string name="cancel">Cancel</string>
 </resources>

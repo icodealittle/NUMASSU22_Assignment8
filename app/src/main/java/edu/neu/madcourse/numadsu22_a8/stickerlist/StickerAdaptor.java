@@ -20,6 +20,7 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
     private final List<String> stickerList;
     private final Context context;
     public int row_index = -1;
+    public String message;
 
 
     public StickerAdaptor(List<String> stickerList, Context context) {
@@ -49,6 +50,7 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
         if(row_index==position){
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
             holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
+            message = stickerList.get(row_index);
         }
         else
         {
