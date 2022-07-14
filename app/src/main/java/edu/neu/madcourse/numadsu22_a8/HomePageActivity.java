@@ -72,6 +72,7 @@ public class HomePageActivity extends AppCompatActivity {
         friendListRecyclerView.setAdapter(friendAdaptor);
 
         notificationActivity = new NotificationActivity();
+        notificationActivity.createNotificationChannel();
 
         currentUser = (User)getIntent().getSerializableExtra("user");
         initFriendList();
