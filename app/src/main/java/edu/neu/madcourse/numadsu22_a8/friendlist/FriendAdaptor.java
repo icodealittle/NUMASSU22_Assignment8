@@ -2,13 +2,10 @@ package edu.neu.madcourse.numadsu22_a8.friendlist;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,14 +15,13 @@ import java.util.List;
 import edu.neu.madcourse.numadsu22_a8.HomePageActivity;
 import edu.neu.madcourse.numadsu22_a8.R;
 import edu.neu.madcourse.numadsu22_a8.User;
-import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
 
-public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
+public class FriendAdaptor extends RecyclerView.Adapter<FriendViewHolder> {
     private final List<User> friendList;
     private final Context context;
+    public String senderName;
     private int row_index = -1;
     private HomePageActivity controller;
-    public String senderName;
 
 
     public FriendAdaptor(List<User> friendList, Context context) {
@@ -53,19 +49,17 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                row_index=position;
+                row_index = position;
                 notifyDataSetChanged();
                 controller.stickerAdaptor.row_index = -1;
                 controller.stickerAdaptor.notifyDataSetChanged();
             }
         });
-        if(row_index==position){
+        if (row_index == position) {
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
             holder.nameTV.setTextColor(Color.parseColor("#ffffff"));
             senderName = friendList.get(row_index).username;
-        }
-        else
-        {
+        } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.nameTV.setTextColor(Color.parseColor("#000000"));
         }

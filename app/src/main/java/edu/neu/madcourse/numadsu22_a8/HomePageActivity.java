@@ -1,6 +1,5 @@
 package edu.neu.madcourse.numadsu22_a8;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,19 +27,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.numadsu22_a8.friendlist.FriendAdaptor;
+import edu.neu.madcourse.numadsu22_a8.history.ChatHistory;
+import edu.neu.madcourse.numadsu22_a8.notification.NotificationActivity;
 import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
 
 public class HomePageActivity extends AppCompatActivity {
+    private static String CLIENT_REGISTRATION_TOKEN;
+    private static String SERVER_KEY;
+    public StickerAdaptor stickerAdaptor;
+    public FriendAdaptor friendAdaptor;
+    public NotificationActivity notificationActivity;
     RecyclerView friendListRecyclerView;
     RecyclerView stickerListRecyclerView;
     List<User> friendList = new ArrayList<>();
     List<String> stickerList;
-    public StickerAdaptor stickerAdaptor;
-    public FriendAdaptor friendAdaptor;
-    public NotificationActivity notificationActivity;
     Button sendBtn;
-    private static String CLIENT_REGISTRATION_TOKEN;
-    private static String SERVER_KEY;
     private DatabaseReference fireBase;
 
     private User currentUser;
@@ -74,7 +75,7 @@ public class HomePageActivity extends AppCompatActivity {
         notificationActivity = new NotificationActivity();
         notificationActivity.createNotificationChannel();
 
-        currentUser = (User)getIntent().getSerializableExtra("user");
+        currentUser = (User) getIntent().getSerializableExtra("user");
         initFriendList();
 
         SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-"; //Add key
@@ -140,15 +141,12 @@ public class HomePageActivity extends AppCompatActivity {
 
 
                 ChatHistory record = new ChatHistory(sender, date, message);
-                Task t1 = fireBase.child(receiver).child("history").child("chat "+date).setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.e("test", "finish");
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), ("Unable to send!"), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), ("Send your sticker to "+receiver+" !"), Toast.LENGTH_SHORT).show();
-                        }
+                Task t1 = fireBase.child(receiver).child("history").child("chat " + date).setValue(record).addOnCompleteListener(task -> {
+                    Log.e("test", "finish");
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), ("Unable to send!"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), ("Send your sticker to " + receiver + " !"), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -161,8 +159,8 @@ public class HomePageActivity extends AppCompatActivity {
         fireBase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getChildren().forEach(child->{
-                    if(!child.getValue(User.class).username.equals(currentUser.username)){
+                snapshot.getChildren().forEach(child -> {
+                    if (!child.getValue(User.class).username.equals(currentUser.username)) {
                         friendList.add(child.getValue(User.class));
                     }
                 });

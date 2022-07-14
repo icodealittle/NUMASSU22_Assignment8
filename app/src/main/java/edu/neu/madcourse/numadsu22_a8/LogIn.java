@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +40,6 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
 
 
         SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-"; //Add key
@@ -105,11 +103,9 @@ public class LogIn extends AppCompatActivity {
                 fireBase.child("users").child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
+                        if (snapshot.exists()) {
                             User user = snapshot.getValue(User.class);
-                            if(user.token != CLIENT_REGISTRATION_TOKEN)
-                            {
+                            if (user.token != CLIENT_REGISTRATION_TOKEN) {
                                 snapshot.child("token").getRef().setValue(CLIENT_REGISTRATION_TOKEN);
                                 user.token = CLIENT_REGISTRATION_TOKEN;
                             }
@@ -117,9 +113,7 @@ public class LogIn extends AppCompatActivity {
                             Intent i = new Intent(LogIn.this, HomePageActivity.class);
                             i.putExtra("user", user);
                             startActivity(i);
-                        }
-                        else
-                        {
+                        } else {
                             User user = new User(userName, CLIENT_REGISTRATION_TOKEN);
                             Task t1 = fireBase.child("users").child(user.username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

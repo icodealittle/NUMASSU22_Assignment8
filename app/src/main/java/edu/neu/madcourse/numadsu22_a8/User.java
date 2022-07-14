@@ -1,11 +1,6 @@
 package edu.neu.madcourse.numadsu22_a8;
 
-import com.google.firebase.installations.Utils;
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class User implements Serializable {
