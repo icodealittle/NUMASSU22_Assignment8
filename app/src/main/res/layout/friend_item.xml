@@ -4,15 +4,18 @@
     android:id="@+id/friendItemRow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f9DEC9"
     app:layoutDescription="@xml/friend_item_scene">
 
     <TextView
         android:id="@+id/usernameTV"
         android:layout_width="149dp"
         android:layout_height="45dp"
+        android:textColor="#3A405A"
         android:layout_marginStart="120dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="174dp"
+        android:textSize="30dp"
         android:textStyle="bold" />
 
 </LinearLayout>
