@@ -5,9 +5,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -83,13 +91,14 @@ public class BackServer extends FirebaseMessagingService {
                 if (remoteMessage.getNotification() != null) {
                     RemoteMessage.Notification notification = remoteMessage.getNotification();
                     showNotification(remoteMessage.getNotification());
-                    Utils.postToastMessage(notification.getTitle(), getApplicationContext());
+                    //Utils.postToastMessage(notification.getTitle(), getApplicationContext());
                 }
             } else {
                 if (remoteMessage.getData().size() > 0) {
                     RemoteMessage.Notification notification = remoteMessage.getNotification();
                     showNotification(notification);
-                    Utils.postToastMessage(remoteMessage.getData().get("title"), getApplicationContext());
+                    //
+                    // Utils.postToastMessage(remoteMessage.getData().get("title"), getApplicationContext());
                 }
             }
         }
@@ -125,12 +134,12 @@ public class BackServer extends FirebaseMessagingService {
             builder = new NotificationCompat.Builder(this);
         }
 
-
         notification = builder.setContentTitle(remoteMessage.getNotification().getTitle())
-                .setContentText(remoteMessage.getNotification().getBody())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.useravatar))
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
+                .setContentText(remoteMessage.getNotification().getBody())
                 .build();
         notificationManager.notify(0, notification);
 
@@ -167,7 +176,7 @@ public class BackServer extends FirebaseMessagingService {
 
         notification = builder.setContentTitle(remoteMessageNotification.getTitle())
                 .setContentText(remoteMessageNotification.getBody())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build();

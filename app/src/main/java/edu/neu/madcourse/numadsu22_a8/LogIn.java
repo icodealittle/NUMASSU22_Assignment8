@@ -67,7 +67,7 @@ public class LogIn extends AppCompatActivity {
                         CLIENT_REGISTRATION_TOKEN = task.getResult();
                     }
                     Log.e("CLIENT_REGISTRATION_TOKEN", CLIENT_REGISTRATION_TOKEN);
-                    Toast.makeText(LogIn.this, "CLIENT_REGISTRATION_TOKEN Existed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LogIn.this, "CLIENT_REGISTRATION_TOKEN Existed", Toast.LENGTH_SHORT).show();
                 }
             }
         });

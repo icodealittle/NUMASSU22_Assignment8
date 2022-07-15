@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#99ffffff">
 
     <TextView
         android:id="@+id/senderNameTV"
@@ -28,6 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/sticker"
-        app:srcCompat="@drawable/drink4" />
+        app:srcCompat="@drawable/drink1" />
 
 </LinearLayout>

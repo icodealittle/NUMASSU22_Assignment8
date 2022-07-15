@@ -25,7 +25,7 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
     public void bindThisData(ChatHistory record) {
         // sets the name of the person to the name textview of the viewholder.
-        nameTV.setText(record.sender);
+        nameTV.setText("Sender: "+record.sender);
         dateTV.setText(record.date);
         stickerTV.setImageResource(record.message);
     }

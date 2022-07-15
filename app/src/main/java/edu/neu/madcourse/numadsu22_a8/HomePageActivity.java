@@ -91,7 +91,7 @@ public class HomePageActivity extends AppCompatActivity {
                         CLIENT_REGISTRATION_TOKEN = task.getResult();
                     }
                     Log.e("CLIENT_REGISTRATION_TOKEN", CLIENT_REGISTRATION_TOKEN);
-                    Toast.makeText(HomePageActivity.this, "CLIENT_REGISTRATION_TOKEN Existed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomePageActivity.this, "CLIENT_REGISTRATION_TOKEN Existed", Toast.LENGTH_SHORT).show();
                 }
             }
         });

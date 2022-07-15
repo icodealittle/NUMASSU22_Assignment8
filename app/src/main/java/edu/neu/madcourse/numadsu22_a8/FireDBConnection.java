@@ -50,6 +50,6 @@ public class FireDBConnection {
         }
 
         final String resp = Utils.fcmHttpConnection(SERVER_KEY, jPayload);
-        Utils.postToastMessage("Status from Server: " + resp, context);
+        //Utils.postToastMessage("Status from Server: " + resp, context);
     }
 }
