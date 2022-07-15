@@ -31,7 +31,7 @@ public class FireDBConnection {
         try {
             jNotification.put("title", "A New Sticker");
             jNotification.put("body", "User "+ sender.username
-                    + " Send a sticker to "
+                    + " Send a sticker to user "
                     + receiver.username);
             jNotification.put("sound", "default");
             jNotification.put("badge", "1");

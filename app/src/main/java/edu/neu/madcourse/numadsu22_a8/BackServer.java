@@ -104,47 +104,6 @@ public class BackServer extends FirebaseMessagingService {
         }
     }
 
-
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param remoteMessage FCM message  received.
-     */
-    @Deprecated
-    private void showNotification(RemoteMessage remoteMessage) {
-
-        Intent intent = new Intent(this, HomePageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Notification notification;
-        NotificationCompat.Builder builder;
-        NotificationManager notificationManager = getSystemService(NotificationManager.class);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            // Configure the notification channel
-            notificationChannel.setDescription(CHANNEL_DESCRIPTION);
-            notificationManager.createNotificationChannel(notificationChannel);
-            builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-
-        } else {
-            builder = new NotificationCompat.Builder(this);
-        }
-
-        notification = builder.setContentTitle(remoteMessage.getNotification().getTitle())
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.useravatar))
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .setContentText(remoteMessage.getNotification().getBody())
-                .build();
-        notificationManager.notify(0, notification);
-
-    }
-
     /**
      * Create and show a simple notification containing the received FCM message.
      *
@@ -173,14 +132,14 @@ public class BackServer extends FirebaseMessagingService {
             builder = new NotificationCompat.Builder(this);
         }
 
-
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.drink6);
         notification = builder.setContentTitle(remoteMessageNotification.getTitle())
                 .setContentText(remoteMessageNotification.getBody())
                 .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setLargeIcon(largeIcon)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build();
         notificationManager.notify(0, notification);
-
     }
 }
