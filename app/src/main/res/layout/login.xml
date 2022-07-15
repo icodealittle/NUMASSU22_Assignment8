@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-
     <EditText
         android:id="@+id/username"
         android:layout_width="216dp"
@@ -33,6 +32,5 @@
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

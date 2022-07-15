@@ -3,7 +3,7 @@
     <string name="user_prompt">Enter Username</string>
     <string name="pass_prompt">Enter Password</string>
     <string name="log_btn">Login</string>
-    <string name="send">Send Sticker</string>
+    <string name="send">Send Stickers</string>
     <string name="hist_chat">Chat history or send more stickers</string>
     <string name="user">Username</string>
     <string name="welcome_user">Welcome!</string>
@@ -12,10 +12,10 @@
     <string name="sticker_image">Sticker image:</string>
     <string name="back_btn">Back</string>
     <string name="num_sent">Num stickers sent</string>
-    <string name="token_num">Num Tokens</string>
+    <string name="token">Token</string>
+    <string name="stat">User Usage Stats</string>
     <string name="hist">History</string>
     <string name="notif">New sticker!</string>
     <string name="sticker">Sticker</string>
     <string name="cancel">Cancel</string>
-
 </resources>

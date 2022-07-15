@@ -1,36 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainActivity"
     android:background="@drawable/background2">
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/button_container"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:gravity="center"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHeight_percent=".125"-->
-    <!--        app:layout_constraintHorizontal_bias="0.142"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSticker"-->
-    <!--        app:layout_constraintVertical_bias="0.342">-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/sendSticker"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:clickable="true"-->
-    <!--            android:text="@string/send"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toEndOf="@id/history"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/recyclerView"-->
-    <!--            app:layout_constraintVertical_bias="1.0" />-->
-
-    <!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -43,33 +18,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <!--    <Button-->
-    <!--        android:id="@+id/sendSticker"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginEnd="380dp"-->
-    <!--        android:clickable="true"-->
-    <!--        android:text="@string/send"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/recyclerView"-->
-    <!--        app:layout_constraintVertical_bias="1.0">-->
-
-    <!--    </Button>-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/history"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginEnd="244dp"-->
-    <!--        android:layout_weight="1"-->
-    <!--        android:text="History"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSticker"-->
-    <!--        app:layout_constraintVertical_bias="1.0" />-->
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSticker"
@@ -105,7 +55,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/history"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/history"
@@ -118,78 +69,6 @@
             app:layout_constraintEnd_toStartOf="@id/sendSticker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
     </LinearLayout>
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/drink1"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_marginTop="28dp"-->
-    <!--        android:layout_marginEnd="35dp"-->
-    <!--        android:onClick="onClickImageButton"-->
-    <!--        android:padding="10dp"-->
-    <!--        android:src="@drawable/drink1"-->
-    <!--        android:tag="sticker10"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.714"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/recyclerView"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/drink2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/drink1"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_marginTop="15dp"-->
-    <!--        android:layout_marginEnd="54dp"-->
-    <!--        android:onClick="onClickImageButton"-->
-    <!--        android:padding="10dp"-->
-    <!--        android:src="@drawable/drink2"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/recyclerView"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/drink1" />-->
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/drink3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/drink2"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_marginTop="13dp"-->
-    <!--        android:onClick="onClickImageButton"-->
-    <!--        android:padding="10dp"-->
-    <!--        android:src="@drawable/drink3"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/drink2"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/drink2" />-->
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/drink4"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/drink3"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:onClick="onClickImageButton"-->
-    <!--        android:padding="10dp"-->
-    <!--        android:src="@drawable/drink4"-->
-    <!--        tools:layout_editor_absoluteX="243dp"-->
-    <!--        tools:layout_editor_absoluteY="396dp" />-->
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/drink5"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/drink4"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:onClick="onClickImageButton"-->
-    <!--        android:padding="10dp"-->
-    <!--        android:src="@drawable/drink5"-->
-    <!--        tools:layout_editor_absoluteX="243dp"-->
-    <!--        tools:layout_editor_absoluteY="513dp" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

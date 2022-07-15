@@ -104,7 +104,7 @@ public class BackServer extends FirebaseMessagingService {
     @Deprecated
     private void showNotification(RemoteMessage remoteMessage) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, HomePageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -143,7 +143,7 @@ public class BackServer extends FirebaseMessagingService {
      */
     private void showNotification(RemoteMessage.Notification remoteMessageNotification) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, HomePageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
