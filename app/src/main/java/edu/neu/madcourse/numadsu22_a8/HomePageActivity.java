@@ -43,6 +43,7 @@ public class HomePageActivity extends AppCompatActivity {
     public FriendAdaptor friendAdaptor;
     Button sendBtn;
     Button checkHistoryBtn;
+    Button userStatBtn;
     private static String CLIENT_REGISTRATION_TOKEN;
     private static String SERVER_KEY;
     private DatabaseReference fireBase;
@@ -149,6 +150,9 @@ public class HomePageActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), ("Unable to send!"), Toast.LENGTH_SHORT).show();
                             } else {
+                                currentUser.stickerNum++;
+                                fireBase.child(currentUser.username).setValue(currentUser);
+
                                 Toast.makeText(getApplicationContext(), ("Send your sticker to " + receiver + " !"), Toast.LENGTH_SHORT).show();
                                 fireBase.child(receiver).addListenerForSingleValueEvent(new ValueEventListener() {
                                    @Override
@@ -179,6 +183,16 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("test", "onclick usage");
                 Intent i = new Intent(HomePageActivity.this, HistoryCollector.class);
+                i.putExtra("user", currentUser);
+                startActivity(i);
+            }
+        });
+
+        userStatBtn = findViewById(R.id.stat);
+        userStatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomePageActivity.this, UserStatusActivity.class);
                 i.putExtra("user", currentUser);
                 startActivity(i);
             }

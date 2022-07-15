@@ -31,8 +31,8 @@
         </activity>
 
         <activity android:name=".HomePageActivity"/>
-        <activity android:name=".NotificationActivity"/>
         <activity android:name=".history.HistoryCollector"/>
+        <activity android:name=".UserStatusActivity" />
 
         <service
             android:name=".BackServer"
