@@ -31,7 +31,7 @@
         </activity>
 
         <activity android:name=".HomePageActivity"/>
-        <activity android:name=".NotificationActivity"/>
+        <activity android:name=".notification.NotificationActivity" />
         <activity android:name=".history.HistoryCollector"/>
 
         <service
