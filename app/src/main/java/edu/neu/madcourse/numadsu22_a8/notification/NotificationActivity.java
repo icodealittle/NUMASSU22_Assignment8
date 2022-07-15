@@ -1,11 +1,8 @@
 
-package edu.neu.madcourse.numadsu22_a8;
+package edu.neu.madcourse.numadsu22_a8.notification;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import edu.neu.madcourse.numadsu22_a8.R;
+import edu.neu.madcourse.numadsu22_a8.User;
 
 
 //source: https://firebase.google.com/docs/cloud-messaging/android/topic-messaging#java_1

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -40,20 +39,15 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
     public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bindThisData(stickerList.get(position));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                row_index=position;
-                notifyDataSetChanged();
-            }
+        holder.itemView.setOnClickListener(view -> {
+            row_index = position;
+            notifyDataSetChanged();
         });
 
-        if(row_index==position){
+        if (row_index == position) {
             holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
             message = stickerList.get(row_index);
-        }
-        else
-        {
+        } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
         }
 

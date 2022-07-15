@@ -18,13 +18,11 @@ import java.util.List;
 
 import edu.neu.madcourse.numadsu22_a8.R;
 import edu.neu.madcourse.numadsu22_a8.User;
-import edu.neu.madcourse.numadsu22_a8.friendlist.FriendAdaptor;
-import edu.neu.madcourse.numadsu22_a8.stickerlist.StickerAdaptor;
 
 public class HistoryCollector extends AppCompatActivity {
+    RecyclerView chatHistoryRecyclerView;
     private DatabaseReference fireBase;
     private List<ChatHistory> historyList = new ArrayList<>();
-    RecyclerView chatHistoryRecyclerView;
     private HistoryAdaptor historyAdaptor;
     private User currentUser;
 
@@ -32,7 +30,7 @@ public class HistoryCollector extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_history);
-        currentUser = (User)getIntent().getSerializableExtra("user");
+        currentUser = (User) getIntent().getSerializableExtra("user");
         fireBase = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.username).child("history");
 
         initHistoryList();
@@ -48,7 +46,7 @@ public class HistoryCollector extends AppCompatActivity {
         fireBase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getChildren().forEach(child->{
+                snapshot.getChildren().forEach(child -> {
                     historyList.add(child.getValue(ChatHistory.class));
                 });
 
