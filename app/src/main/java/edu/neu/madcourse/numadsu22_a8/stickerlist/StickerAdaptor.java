@@ -49,12 +49,12 @@ public class StickerAdaptor extends RecyclerView.Adapter<StickerViewHolder> {
         });
 
         if(row_index==position){
-            holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
+            holder.stickerIV.setBackgroundColor(Color.parseColor("#44685044"));
             message = stickerList.get(row_index);
         }
         else
         {
-            holder.itemView.setBackgroundColor(Color.parseColor("#00000000"));
+            holder.stickerIV.setBackgroundColor(Color.parseColor("#44ffffff"));
         }
 
     }

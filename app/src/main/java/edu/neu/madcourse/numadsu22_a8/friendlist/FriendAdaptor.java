@@ -61,12 +61,12 @@ public class FriendAdaptor  extends RecyclerView.Adapter<FriendViewHolder> {
             }
         });
         if(row_index==position){
-            holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
+            holder.nameTV.setBackgroundColor(Color.parseColor("#44685044"));
             senderName = friendList.get(row_index).username;
         }
         else
         {
-            holder.itemView.setBackgroundColor(Color.parseColor("#00000000"));
+            holder.nameTV.setBackgroundColor(Color.parseColor("#44ffffff"));
         }
 
     }
