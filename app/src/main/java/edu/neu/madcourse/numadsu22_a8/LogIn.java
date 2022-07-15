@@ -1,7 +1,11 @@
 package edu.neu.madcourse.numadsu22_a8;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +39,9 @@ public class LogIn extends AppCompatActivity {
     private EditText userNameInput;
     private Button login;
     private String userName;
+    private static String TAG = "ShowPermActivity";
+    private static final int DEV_ID = 1;
+    private static final int PHOTO_PERMISSION = 15;
 
     private ImageView imageView;
 
@@ -42,7 +51,8 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
+//        String statePermission = android.Manifest.permission.READ_PHONE_STATE;
+//        CheckPermission(statePermission);
 
         SERVER_KEY = "key=AAAAuqkZ0v4:APA91bEuftlK6bcSKv7W5OpyKjGuWAYZsBJCXW-0Kzikv9_2e0avTtiDeOneAlpfFBVQLMOJpajMmGls7yoTY4YHNriQ8ez0DElAEiG7kn78CSqHM4Ytmiczd1-gLHK2JKj5Uz5QzLc-"; //Add key
 
@@ -148,4 +158,23 @@ public class LogIn extends AppCompatActivity {
 
         });
     }
+
+//    private void CheckPermission(String statePermission) {
+//        Log.v(TAG, "About to check permissions");
+//        int permissionCheck = ContextCompat.checkSelfPermission(this, statePermission);
+//
+//        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+//            Log.i(TAG, "Already have permission-- groovy!");
+//            Toast.makeText(getApplicationContext(), "Already have READ_PHONE_STATE permission!", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Log.e(TAG, "Don't have permissions yet, gotta ask the user");
+//
+//            // This updates the TextView with our info
+//            Toast.makeText(getApplicationContext(), "Please allow the permission for notification!", Toast.LENGTH_SHORT).show();
+//
+//            // This launches the permissions dialog
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{statePermission}, DEV_ID);
+//        }
+//    }
 }
